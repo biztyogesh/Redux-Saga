@@ -22,3 +22,7 @@ export function setPhotosReducers(state:any ,action:any) {
   state.photos = action.payload;
   state.isLoading = false;
 }
+export function sendDataReducers(state: any, action: any) {
+  state.data = action.payload;
+  state.isLoading = false;
+}

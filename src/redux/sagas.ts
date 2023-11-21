@@ -48,10 +48,30 @@ const getPhotos = async () => {
   return await response.json();
 };
 
+const sendData = async (data: any) => {
+  let response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: data
+  });
+  return await response.json();
+};
+
 function* photosData ():any {
   try {
     let data = yield call(getPhotos);
     yield put({ type: "user/setphotos", payload: data });
+  } catch (error) {
+    yield put({ type: "user/setError" });
+  }
+}
+
+
+function* sendDataSaga({ payload }: any): any {
+  try {
+    let data: any = yield call(() => sendData(payload));
+    console.log("sent data", data);
+
+    yield put({ type: "user/sendData", payload: data });
   } catch (error) {
     yield put({ type: "user/setError" });
   }
@@ -63,6 +83,8 @@ function* rootSaga() {
   yield takeEvery("FETCH_PRODUCT", productData);
   yield takeEvery("FETCH_ALBUMS",albumsData);
   yield takeEvery("FETCH_PHOTOS",photosData)
+  yield takeEvery("SEND_DATA",sendDataSaga)
+
 }
 
 export default rootSaga;

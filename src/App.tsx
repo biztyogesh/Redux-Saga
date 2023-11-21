@@ -15,9 +15,14 @@ function App() {
     dispatch({ type: "FETCH_PRODUCT" });
     dispatch({ type: "FETCH_ALBUMS" });
     dispatch({ type: "FETCH_PHOTOS" });
+    dispatch ({ type: "SEND_DATA", payload: {
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    } });
 
   }, [dispatch]);
-  console.log(photos);
+  console.log(data);
 
   if (isLoading) {
     return <div className="spin"></div>;
@@ -25,7 +30,7 @@ function App() {
     return (
       <>
         <div className="App">
-          <table>
+          {/* <table>
             <thead>
               <tr>
                 <td>ID</td>
@@ -46,7 +51,7 @@ function App() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> */}
 
 
           {/* <div className="App">
@@ -72,7 +77,7 @@ function App() {
             </table>
           </div> */}
 
-          <div className="App">
+          {/* <div className="App">
             <table className="table-data">
               <thead>
                 <tr>
@@ -82,18 +87,43 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {albums.slice(1,70).map((element: any, index: any) => (
+                {albums.slice(1,100).map((element: any, index: any) => (
                   <tr key={index}>
-                    <td>{element.userId}</td>
+                    <td>{element.UserId}</td>
                     <td>{element.id}</td>
                     <td>{element.title}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div> */}
+
+          
+          <div className="App">
+            <table className="table-data">
+              <thead>
+                <tr>
+                  <td>ID</td>
+                  <td>Name</td>
+                  <td>UserName</td>
+                  <td>Website</td>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((element: any, index: any) => (
+                  <tr key={index}>
+                    <td>{element.id}</td>
+                    <td>{element.name}</td>
+                    <td>{element.username}</td>
+                    <td>{element.website}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          <div className="App">
+
+          {/* <div className="App">
             <table className="table-data">
               <thead>
                 <tr>
@@ -110,7 +140,7 @@ function App() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> */}
         </div>
       </>
     );
